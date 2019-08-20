@@ -44,8 +44,8 @@ class Slider extends React.Component {
       cardsToShow,
       hideArrows: hideArrowsOnNoSlides && numberOfChildren <= cardsToShow,
     }, () => this.updateResponsiveView());
-    typeof window !== 'undefined' &&
-      window.addEventListener('resize', this.updateResponsiveView);
+    typeof window !== 'undefined'
+      && window.addEventListener('resize', this.updateResponsiveView);
     if (autoSlide) {
       this.autoSlider = new Timer(() => {
         let updatedInitialCard = 0;
@@ -61,8 +61,8 @@ class Slider extends React.Component {
   }
 
   componentWillUnmount() {
-    typeof window !== 'undefined' && // eslint-disable-line no-unused-expressions
-      window.removeEventListener('resize', this.updateResponsiveView);
+    typeof window !== 'undefined' // eslint-disable-line no-unused-expressions
+      && window.removeEventListener('resize', this.updateResponsiveView);
   }
 
   updateResponsiveView() {
@@ -90,13 +90,13 @@ class Slider extends React.Component {
   changeInitialCard(initialCard) {
     const { afterSlide, beforeSlide } = this.props;
     if (beforeSlide) {
-      beforeSlide();
+      beforeSlide(initialCard);
     }
     this.setState({
       initialCard,
     }, () => {
       if (afterSlide) {
-        afterSlide();
+        afterSlide(initialCard);
       }
     });
   }
