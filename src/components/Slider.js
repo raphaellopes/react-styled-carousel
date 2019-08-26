@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import sortBy from 'lodash.sortby';
+import { Swipeable } from 'react-swipeable';
 
 import SliderTrack from './SliderTrack';
 import CardWrapper from './CardWrapper';
@@ -44,8 +45,10 @@ class Slider extends React.Component {
       cardsToShow,
       hideArrows: hideArrowsOnNoSlides && numberOfChildren <= cardsToShow,
     }, () => this.updateResponsiveView());
+
     typeof window !== 'undefined'
       && window.addEventListener('resize', this.updateResponsiveView);
+
     if (autoSlide) {
       this.autoSlider = new Timer(() => {
         let updatedInitialCard = 0;
@@ -188,11 +191,16 @@ class Slider extends React.Component {
       >
         <SliderWrapper {...otherProps}>
           {showArrows && !this.state.hideArrows && this.renderLeftArrow()}
-          <SliderTrack>
-            <SliderList translateX={initialCard * childWidth}>
-              {this.renderChildren(children, cardsToShow || children.length)}
-            </SliderList>
-          </SliderTrack>
+          <Swipeable
+            onSwipedLeft={this.handleRightArrowClick}
+            onSwipedRight={this.handleLeftArrowClick}
+          >
+            <SliderTrack>
+              <SliderList translateX={initialCard * childWidth}>
+                {this.renderChildren(children, cardsToShow || children.length)}
+              </SliderList>
+            </SliderTrack>
+          </Swipeable>
           {showArrows && !this.state.hideArrows && this.renderRightArrow()}
         </SliderWrapper>
         <DotsWrapper>
