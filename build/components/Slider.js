@@ -358,7 +358,7 @@ Slider.propTypes = {
   padding: _propTypes["default"].string,
   margin: _propTypes["default"].string,
   hideArrowsOnNoSlides: _propTypes["default"].bool,
-  DotsWrapper: _propTypes["default"].func
+  DotsWrapper: _propTypes["default"].shape({})
 };
 var _default = Slider;
 exports["default"] = _default;
