@@ -11,6 +11,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _lodash = _interopRequireDefault(require("lodash.sortby"));
 
+var _reactSwipeable = require("react-swipeable");
+
 var _SliderTrack = _interopRequireDefault(require("./SliderTrack"));
 
 var _CardWrapper = _interopRequireDefault(require("./CardWrapper"));
@@ -306,9 +308,12 @@ function (_React$Component) {
         onMouseEnter: function onMouseEnter() {
           return pauseOnMouseOver && _this4.autoSlider && _this4.autoSlider.pause();
         }
-      }, _react["default"].createElement(_SliderWrapper["default"], otherProps, showArrows && !this.state.hideArrows && this.renderLeftArrow(), _react["default"].createElement(_SliderTrack["default"], null, _react["default"].createElement(_SliderList["default"], {
+      }, _react["default"].createElement(_SliderWrapper["default"], otherProps, showArrows && !this.state.hideArrows && this.renderLeftArrow(), _react["default"].createElement(_reactSwipeable.Swipeable, {
+        onSwipedLeft: this.handleRightArrowClick,
+        onSwipedRight: this.handleLeftArrowClick
+      }, _react["default"].createElement(_SliderTrack["default"], null, _react["default"].createElement(_SliderList["default"], {
         translateX: initialCard * childWidth
-      }, this.renderChildren(children, cardsToShow || children.length))), showArrows && !this.state.hideArrows && this.renderRightArrow()), _react["default"].createElement(DotsWrapper, null, showDots && this.renderDots()));
+      }, this.renderChildren(children, cardsToShow || children.length)))), showArrows && !this.state.hideArrows && this.renderRightArrow()), _react["default"].createElement(DotsWrapper, null, showDots && this.renderDots()));
     }
   }]);
 
